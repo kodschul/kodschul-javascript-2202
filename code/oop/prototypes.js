@@ -15,10 +15,15 @@ function Animal(name) {
 
 function Dog(name) {
   Animal.call(this, name);
+
+  this.makeSound = function () {
+    console.log(`${this.name} barks ${this.sound}`);
+  };
 }
 
 const dog1 = new Dog("Puppy");
 console.log(dog1);
+dog1.makeSound();
 // Animal.prototype.sayHello = function () {
 //   console.log(`${this.name} says hello`);
 // };
