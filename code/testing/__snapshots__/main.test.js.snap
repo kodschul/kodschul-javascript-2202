@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`main Tests should create new user 1`] = `
+{
+  "firstName": "John",
+  "id": "JohnDoe1",
+  "lastName": "Doe",
+  "name": "John Doe",
+}
+`;
