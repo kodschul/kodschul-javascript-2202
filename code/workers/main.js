@@ -1,17 +1,22 @@
 console.log("Hello World!");
 
-let worker = new Worker("./worker.js");
+let worker1 = new Worker("./worker.js");
+let worker2 = new Worker("./worker.js");
 
-worker.onmessage = function (event) {
-  console.log(`Worker said: ${JSON.stringify(event.data)}`);
-};
+worker1.onmessage = onWorkerMessage;
+worker2.onmessage = onWorkerMessage;
 
-worker.onerror = function () {
-  console.log("Worker had an error");
-};
+let characters = [];
+
+function onWorkerMessage(event) {
+  characters.push(event.data);
+}
 
 document.getElementById("rootButton").onclick = () => {
-  worker.postMessage({
-    name: "say hello",
+  worker1.postMessage({
+    characterId: 1,
+  });
+  worker2.postMessage({
+    characterId: 2,
   });
 };
