@@ -2,6 +2,10 @@ function sum(x, y) {
   return x + y;
 }
 
+function multiply(x, y) {
+  return x * y;
+}
+
 function createUser(name) {
   return {
     id: name.replace(" ", "") + 1,
@@ -11,4 +15,4 @@ function createUser(name) {
   };
 }
 
-module.exports = { sum, createUser };
+module.exports = { sum, multiply, createUser };
