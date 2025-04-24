@@ -1,15 +1,27 @@
-// XMLHttpRequest (XHR)
-const xhr = new XMLHttpRequest();
-xhr.open("GET", "https://rickandmortyapi.com/api/character/2", true);
+const fetchData = async () => {
+  try {
+    const response = await fetch(
+      "https://rickandmortyapi.com/api/character/" +
+        Math.floor(Math.random() * 50) +
+        1
+    );
 
-xhr.onreadystatechange = function () {
-  if (xhr.readyState === XMLHttpRequest.DONE) {
-    document.body.innerHTML = xhr.responseText;
-    if (xhr.status === 200) {
-      console.log(xhr.responseText);
+    if (response.status === 200) {
+      const data = await response.json();
+      console.log(data);
+
+      document.body.innerHTML = `
+
+      <a href="character.html?id=${data.id}" target="_blank">
+            <h1>${data.name}</h1>
+            <img src="${data.image}" alt="${data.name}" />
+
+      </a>
+            `;
     } else {
-      console.error("An error occurred");
+      console.error("Error fetching data");
     }
+  } catch (e) {
+    console.error("Error fetching data", e);
   }
 };
-xhr.send();

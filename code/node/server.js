@@ -1,21 +1,10 @@
 const express = require("express");
 const app = express();
 
-const users = [
-  { id: 1, name: "John" },
-  { id: 2, name: "Jane" },
-];
-
-app.get("/api/users", (req, res) => {
-  res.json(users);
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/client/home.html");
 });
 
-app.get("/api/create-user", (req, res) => {
-  users.push({ id: users.length + 1, name: req.query.name });
-
-  res.send("ok");
-});
-
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+app.listen(4000, () => {
+  console.log("Server is running on port http://localhost:4000");
 });
