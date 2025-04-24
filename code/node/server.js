@@ -81,6 +81,11 @@ const io = new Server(server);
 io.on("connection", (socket) => {
   console.log("New client connected: ", socket.id);
 
+  socket.on("chat_new_message", (message) => {
+    console.log("New message: ", message);
+    io.emit("chat_new_message", message);
+  });
+
   socket.on("disconnect", () => {
     console.log("Client disconnected: ", socket.id);
   });
