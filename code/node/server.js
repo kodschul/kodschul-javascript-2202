@@ -1,12 +1,17 @@
 const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
+const { Server } = require("socket.io");
 
 app.use(bodyParser.json());
 
 /** FRONTEND */
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/client/home.html");
+});
+
+app.get("/chat", (req, res) => {
+  res.sendFile(__dirname + "/client/chat.html");
 });
 
 app.get("/login", (req, res) => {
@@ -65,6 +70,18 @@ app.post("/api/login", (req, res) => {
   });
 });
 
-app.listen(4000, () => {
+const server = app.listen(4000, () => {
   console.log("Server is running on port http://localhost:4000");
+});
+
+const io = new Server(server);
+
+/** SOCKET SERVER  */
+
+io.on("connection", (socket) => {
+  console.log("New client connected: ", socket.id);
+
+  socket.on("disconnect", () => {
+    console.log("Client disconnected: ", socket.id);
+  });
 });
