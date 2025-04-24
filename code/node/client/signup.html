@@ -72,4 +72,38 @@
     </form>
 </body>
 
+<script>
+
+    const form = document.querySelector("form");
+
+    const createUser = async (user) => {
+        const response = await fetch("/api/users", {
+            method: "POST",
+            body: JSON.stringify(user),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        const data = await response.json();
+        alert("User created successfully");
+    }
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const user = {
+            firstName: form.vorname.value,
+            lastName: form.nachname.value,
+            email: form.email.value,
+            password: form.passwort.value,
+        }
+
+        createUser(user);
+    });
+
+
+
+</script>
+
 </html>
